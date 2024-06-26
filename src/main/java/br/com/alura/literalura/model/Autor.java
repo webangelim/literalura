@@ -30,11 +30,9 @@ public class Autor {
 
     @Override
     public String toString() {
-        return "Autor{" +
-                "nome='" + nome + '\'' +
+        return  "Nome='" + nome + '\'' +
                 ", ano de nascimento=" + anoNascimento +
-                ", ano da morte=" + anoMorte +
-                '}';
+                ", ano da morte=" + anoMorte;
     }
 
     public Long getId() {

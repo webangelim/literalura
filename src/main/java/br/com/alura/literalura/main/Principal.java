@@ -23,6 +23,7 @@ public class Principal {
     private final ConsumoApi consumoApi = new ConsumoApi();
     private final ConverteDados converteDados = new ConverteDados();
     private List<Livro> livros = new ArrayList<>();
+    private List<Autor> autores = new ArrayList<>();
 
     public Principal(ILivroRepository livroRepository, IAutorRepository autorRepository) {
         this.livroRepository = livroRepository;
@@ -34,7 +35,10 @@ public class Principal {
         var menu = """
                 1 - Buscar livro por título
                 2 - Listar livros cadastrados
-                
+                3 - Listar autores cadastrados
+                4 - Listar autor vivo em determinado ano
+                5 - Listar livros por idioma
+                                
                 0 - Sair
                 """;
         while (run != 0) {
@@ -48,11 +52,58 @@ public class Principal {
                 case 2:
                     listarLivrosCadastrados();
                     break;
+                case 3:
+                    listarAutoresCadastrados();
+                    break;
+                case 4:
+                    listarAutoresVivosEmDeterminadoAno();
+                    break;
+                case 5:
+                    listarLivrosPorIdioma();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
+            }
+        }
+    }
+
+    private void listarLivrosPorIdioma() {
+        System.out.println("Digite o idioma a ser buscado: ");
+        var idioma = sc.nextLine();
+        livros = livroRepository.findByIdiomaIgnoreCase(idioma);
+        if (livros.isEmpty()) {
+            System.out.println("Não há livros nesse idioma cadastrados no banco.");
+        } else {
+            for (Livro livro : livros) {
+                System.out.println(livro);
+            }
+        }
+    }
+
+    private void listarAutoresVivosEmDeterminadoAno() {
+        System.out.println("Digite o ano: ");
+        Integer ano = sc.nextInt();
+        autores = autorRepository.autorVivo(ano);
+        if (autores.isEmpty()) {
+            System.out.println("Não havia autores vivos no ano " + ano + " cadastrado no banco.");
+        } else {
+            for (Autor autor : autores) {
+                System.out.println(autor);
+            }
+        }
+    }
+
+    private void listarAutoresCadastrados() {
+        autores = autorRepository.findAll();
+
+        if (autores.isEmpty()) {
+            System.out.println("Não há autores cadastrados no momento.");
+        } else {
+            for (Autor autor : autores) {
+                System.out.println(autor);
             }
         }
     }
