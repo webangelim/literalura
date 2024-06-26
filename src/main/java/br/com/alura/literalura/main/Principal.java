@@ -33,13 +33,16 @@ public class Principal {
     public void exibeMenu() {
         int run = -1;
         var menu = """
-                1 - Buscar livro por título
-                2 - Listar livros cadastrados
-                3 - Listar autores cadastrados
-                4 - Listar autor vivo em determinado ano
-                5 - Listar livros por idioma
-                                
-                0 - Sair
+                \n
+                ################ LiterAlura #################
+                # 1 - Buscar livro por título               #
+                # 2 - Listar livros cadastrados             #
+                # 3 - Listar autores cadastrados            #
+                # 4 - Listar autor vivo em determinado ano  #
+                # 5 - Listar livros por idioma              #
+                #                                           #
+                # 0 - Sair                                  #
+                #############################################
                 """;
         while (run != 0) {
             System.out.println(menu);
